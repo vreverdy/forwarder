@@ -63,9 +63,13 @@ struct is_similar<T[N], U[]>: is_similar<T, U> {};
 template <class T, class U>
 inline constexpr bool is_similar_v = is_similar<T, U>::value;
 
+// Concept implementation
+template <class T, class U>
+concept concept_similar = is_similar_v<T, U>;
+
 // Concept
 template <class T, class U>
-concept similar = is_similar_v<T, U>;
+concept similar = concept_similar<T, U> && concept_similar<U, T>;
 // ========================================================================== //
 
 
@@ -79,9 +83,13 @@ struct is_alike: is_similar<std::decay_t<T>, std::decay_t<U>> {};
 template <class T, class U>
 inline constexpr bool is_alike_v = is_alike<T, U>::value;
 
+// Concept implementation
+template <class T, class U>
+concept concept_alike = is_alike_v<T, U>;
+
 // Concept
 template <class T, class U>
-concept alike = is_alike_v<T, U>;
+concept alike = concept_alike<T, U> && concept_alike<U, T>;
 // ========================================================================== //
 
 
