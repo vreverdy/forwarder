@@ -85,7 +85,7 @@ inline constexpr bool is_alike_v = is_alike<T, U>::value;
 
 // Concept implementation
 template <class T, class U>
-concept concept_alike = is_alike_v<T, U>;
+concept concept_alike = similar<std::decay_t<T>, std::decay_t<U>>;
 
 // Concept
 template <class T, class U>
